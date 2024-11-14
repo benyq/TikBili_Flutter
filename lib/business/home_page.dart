@@ -1,3 +1,4 @@
+import 'package:TikBili/business/video/video_container_page.dart';
 import 'package:flutter/widgets.dart';
 
 class HomePage extends StatefulWidget {
@@ -10,8 +11,10 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return PageView.builder(itemBuilder: (context, index) {
-      return Container();
+    return PageView.builder(
+      itemCount: 1,
+        itemBuilder: (context, index) {
+      return const VideoContainerPage();
     });
   }
 }

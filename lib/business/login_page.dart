@@ -119,7 +119,7 @@ class _LoginPageState extends State<LoginPage> {
       if (response.isSuccess) {
         if (mounted) {
           SmartDialog.dismiss();
-          Navigator.pushNamed(context, AppRoutes.homePage);
+          Navigator.pushReplacementNamed(context, AppRoutes.homePage);
         }
       } else {
         // 清除cookie

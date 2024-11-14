@@ -2,6 +2,7 @@
 //
 //     final recommendVideoModel = recommendVideoModelFromJson(jsonString);
 
+import 'package:meta/meta.dart';
 import 'dart:convert';
 
 RecommendVideoModel recommendVideoModelFromJson(String str) => RecommendVideoModel.fromJson(json.decode(str));
@@ -9,43 +10,43 @@ RecommendVideoModel recommendVideoModelFromJson(String str) => RecommendVideoMod
 String recommendVideoModelToJson(RecommendVideoModel data) => json.encode(data.toJson());
 
 class RecommendVideoModel {
-  List<Item>? item;
+  List<Item> item;
   dynamic businessCard;
   dynamic floorInfo;
   dynamic userFeature;
-  Abtest? abtest;
-  int? preloadExposePct;
-  int? preloadFloorExposePct;
-  int? mid;
+  Abtest abtest;
+  int preloadExposePct;
+  int preloadFloorExposePct;
+  int mid;
 
   RecommendVideoModel({
-    this.item,
-    this.businessCard,
-    this.floorInfo,
-    this.userFeature,
-    this.abtest,
-    this.preloadExposePct,
-    this.preloadFloorExposePct,
-    this.mid,
+    required this.item,
+    required this.businessCard,
+    required this.floorInfo,
+    required this.userFeature,
+    required this.abtest,
+    required this.preloadExposePct,
+    required this.preloadFloorExposePct,
+    required this.mid,
   });
 
   factory RecommendVideoModel.fromJson(Map<String, dynamic> json) => RecommendVideoModel(
-    item: json["item"] == null ? [] : List<Item>.from(json["item"]!.map((x) => Item.fromJson(x))),
+    item: List<Item>.from(json["item"].map((x) => Item.fromJson(x))),
     businessCard: json["business_card"],
     floorInfo: json["floor_info"],
     userFeature: json["user_feature"],
-    abtest: json["abtest"] == null ? null : Abtest.fromJson(json["abtest"]),
+    abtest: Abtest.fromJson(json["abtest"]),
     preloadExposePct: json["preload_expose_pct"],
     preloadFloorExposePct: json["preload_floor_expose_pct"],
     mid: json["mid"],
   );
 
   Map<String, dynamic> toJson() => {
-    "item": item == null ? [] : List<dynamic>.from(item!.map((x) => x.toJson())),
+    "item": List<dynamic>.from(item.map((x) => x.toJson())),
     "business_card": businessCard,
     "floor_info": floorInfo,
     "user_feature": userFeature,
-    "abtest": abtest?.toJson(),
+    "abtest": abtest.toJson(),
     "preload_expose_pct": preloadExposePct,
     "preload_floor_expose_pct": preloadFloorExposePct,
     "mid": mid,
@@ -53,10 +54,10 @@ class RecommendVideoModel {
 }
 
 class Abtest {
-  String? group;
+  String group;
 
   Abtest({
-    this.group,
+    required this.group,
   });
 
   factory Abtest.fromJson(Map<String, dynamic> json) => Abtest(
@@ -69,78 +70,75 @@ class Abtest {
 }
 
 class Item {
-  int? id;
-  String? bvid;
-  int? cid;
-  Goto? goto;
-  String? uri;
-  String? pic;
-  String? pic43;
-  String? title;
-  int? duration;
-  int? pubdate;
-  Owner? owner;
-  Stat? stat;
+  int id;
+  String bvid;
+  int cid;
+  String uri;
+  String pic;
+  String pic43;
+  String title;
+  int duration;
+  int pubdate;
+  Owner owner;
+  Stat stat;
   dynamic avFeature;
-  int? isFollowed;
-  RcmdReason? rcmdReason;
-  int? showInfo;
-  String? trackId;
-  int? pos;
+  int isFollowed;
+  dynamic rcmdReason;
+  int showInfo;
+  String trackId;
+  int pos;
   dynamic roomInfo;
   dynamic ogvInfo;
   dynamic businessInfo;
-  int? isStock;
-  int? enableVt;
-  String? vtDisplay;
-  int? dislikeSwitch;
-  int? dislikeSwitchPc;
+  int isStock;
+  int enableVt;
+  String vtDisplay;
+  int dislikeSwitch;
+  int dislikeSwitchPc;
 
   Item({
-    this.id,
-    this.bvid,
-    this.cid,
-    this.goto,
-    this.uri,
-    this.pic,
-    this.pic43,
-    this.title,
-    this.duration,
-    this.pubdate,
-    this.owner,
-    this.stat,
-    this.avFeature,
-    this.isFollowed,
-    this.rcmdReason,
-    this.showInfo,
-    this.trackId,
-    this.pos,
-    this.roomInfo,
-    this.ogvInfo,
-    this.businessInfo,
-    this.isStock,
-    this.enableVt,
-    this.vtDisplay,
-    this.dislikeSwitch,
-    this.dislikeSwitchPc,
+    required this.id,
+    required this.bvid,
+    required this.cid,
+    required this.uri,
+    required this.pic,
+    required this.pic43,
+    required this.title,
+    required this.duration,
+    required this.pubdate,
+    required this.owner,
+    required this.stat,
+    required this.avFeature,
+    required this.isFollowed,
+    required this.rcmdReason,
+    required this.showInfo,
+    required this.trackId,
+    required this.pos,
+    required this.roomInfo,
+    required this.ogvInfo,
+    required this.businessInfo,
+    required this.isStock,
+    required this.enableVt,
+    required this.vtDisplay,
+    required this.dislikeSwitch,
+    required this.dislikeSwitchPc,
   });
 
   factory Item.fromJson(Map<String, dynamic> json) => Item(
     id: json["id"],
     bvid: json["bvid"],
     cid: json["cid"],
-    goto: gotoValues.map[json["goto"]]!,
     uri: json["uri"],
     pic: json["pic"],
     pic43: json["pic_4_3"],
     title: json["title"],
     duration: json["duration"],
     pubdate: json["pubdate"],
-    owner: json["owner"] == null ? null : Owner.fromJson(json["owner"]),
-    stat: json["stat"] == null ? null : Stat.fromJson(json["stat"]),
+    owner: Owner.fromJson(json["owner"]),
+    stat: Stat.fromJson(json["stat"]),
     avFeature: json["av_feature"],
     isFollowed: json["is_followed"],
-    rcmdReason: json["rcmd_reason"] == null ? null : RcmdReason.fromJson(json["rcmd_reason"]),
+    rcmdReason: json["rcmd_reason"],
     showInfo: json["show_info"],
     trackId: json["track_id"],
     pos: json["pos"],
@@ -158,18 +156,17 @@ class Item {
     "id": id,
     "bvid": bvid,
     "cid": cid,
-    "goto": gotoValues.reverse[goto],
     "uri": uri,
     "pic": pic,
     "pic_4_3": pic43,
     "title": title,
     "duration": duration,
     "pubdate": pubdate,
-    "owner": owner?.toJson(),
-    "stat": stat?.toJson(),
+    "owner": owner.toJson(),
+    "stat": stat.toJson(),
     "av_feature": avFeature,
     "is_followed": isFollowed,
-    "rcmd_reason": rcmdReason?.toJson(),
+    "rcmd_reason": rcmdReason,
     "show_info": showInfo,
     "track_id": trackId,
     "pos": pos,
@@ -184,23 +181,16 @@ class Item {
   };
 }
 
-enum Goto {
-  AV
-}
-
-final gotoValues = EnumValues({
-  "av": Goto.AV
-});
 
 class Owner {
-  int? mid;
-  String? name;
-  String? face;
+  int mid;
+  String name;
+  String face;
 
   Owner({
-    this.mid,
-    this.name,
-    this.face,
+    required this.mid,
+    required this.name,
+    required this.face,
   });
 
   factory Owner.fromJson(Map<String, dynamic> json) => Owner(
@@ -216,37 +206,17 @@ class Owner {
   };
 }
 
-class RcmdReason {
-  int? reasonType;
-  String? content;
-
-  RcmdReason({
-    this.reasonType,
-    this.content,
-  });
-
-  factory RcmdReason.fromJson(Map<String, dynamic> json) => RcmdReason(
-    reasonType: json["reason_type"],
-    content: json["content"],
-  );
-
-  Map<String, dynamic> toJson() => {
-    "reason_type": reasonType,
-    "content": content,
-  };
-}
-
 class Stat {
-  int? view;
-  int? like;
-  int? danmaku;
-  int? vt;
+  int view;
+  int like;
+  int danmaku;
+  int vt;
 
   Stat({
-    this.view,
-    this.like,
-    this.danmaku,
-    this.vt,
+    required this.view,
+    required this.like,
+    required this.danmaku,
+    required this.vt,
   });
 
   factory Stat.fromJson(Map<String, dynamic> json) => Stat(
