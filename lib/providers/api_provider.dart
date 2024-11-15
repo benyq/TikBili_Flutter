@@ -1,5 +1,3 @@
-import 'dart:js_interop';
-
 import 'package:TikBili/http/bilibili/bilibili_server.dart';
 import 'package:TikBili/http/bilibili_response.dart';
 import 'package:TikBili/http/dio_client.dart';
