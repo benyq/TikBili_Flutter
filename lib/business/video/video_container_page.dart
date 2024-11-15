@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:TikBili/business/video/item/video_item_widget.dart';
 import 'package:TikBili/business/video/video_view_model.dart';
 import 'package:flutter/cupertino.dart';
@@ -25,10 +27,13 @@ class _VideoContainerPageState extends ConsumerState<VideoContainerPage> {
         ref.watch(videoViewModelProvider.select((v) => v.videoList));
     return PageView.builder(
         scrollDirection: Axis.vertical,
-        itemCount: videoList.length,
+        // itemCount: videoList.length,
+        itemCount: min(videoList.length, 1),
         itemBuilder: (context, index) {
           var item = videoList[index];
-          return VideoItemWidget(videoItem: item);
+          return SizedBox(
+            height: double.infinity,
+              child: VideoItemWidget(videoItem: item));
         });
   }
 }

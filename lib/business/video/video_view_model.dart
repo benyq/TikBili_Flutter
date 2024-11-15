@@ -20,7 +20,8 @@ class VideoViewModel extends _$VideoViewModel {
     var data = await api.getRecommendVideoList(_page).handle();
     if (data == null) return;
     var fetchData = [];
-    for (var e in data.item) {
+    var videos = data.item.take(1);
+    for (var e in videos) {
       var videoDetail = await api.videoInfo(e.bvid).handle();
       if (videoDetail == null) continue;
       var videoUrl = await api.videoUrl(e.bvid, e.cid.toString()).handle();
@@ -30,7 +31,7 @@ class VideoViewModel extends _$VideoViewModel {
           videoDetail.bvid,
           videoDetail.title,
           videoDetail.pic,
-          Uri.encodeComponent(url.url),
+          url.url,
           videoDetail.dimension.width,
           videoDetail.dimension.height,
           url.length,

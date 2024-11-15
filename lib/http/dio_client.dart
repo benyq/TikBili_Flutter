@@ -21,13 +21,13 @@ class DioClient {
   Dio get dio => _dio;
 
   DioClient._internal() {
-    // Map<String, String> headers = {
-    //   "Referer": "https://www.bilibili.com/",
-    //   "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36",
-    //   "Origin": "https://www.bilibili.com/",
-    //   "Accept": "*/*",
-    //   "Accept-Language":"zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7"
-    // };
+    Map<String, String> headers = {
+      "Referer": "https://www.bilibili.com/",
+      "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36",
+      "Origin": "https://www.bilibili.com/",
+      "Accept": "*/*",
+      "Accept-Language":"zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7"
+    };
 
     var options = BaseOptions(
       connectTimeout: const Duration(seconds: 5),
