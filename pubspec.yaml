@@ -54,6 +54,10 @@ dependencies:
   flutter_smart_dialog: ^4.9.8+5
   equatable: ^2.0.5
   video_player: ^2.9.2
+  sqflite: ^2.4.1
+  easy_refresh: ^3.4.0
+  # lottie动画 https://pub-web.flutter-io.cn/packages/lottie/install
+  lottie: ^2.5.0
 
 
 dev_dependencies:

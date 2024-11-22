@@ -2,6 +2,8 @@ import 'package:TikBili/business/data/user_storage.dart';
 import 'package:TikBili/business/home_page.dart';
 import 'package:TikBili/business/login_page.dart';
 import 'package:TikBili/business/splash_page.dart';
+import 'package:TikBili/business/video/videoState.dart';
+import 'package:TikBili/business/video/video_item/horizontalVideoItemWidget.dart';
 import 'package:TikBili/utils/log.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -11,6 +13,7 @@ class AppRoutes {
   static const indexPage = "/";
   static const loginPage = "/login";
   static const homePage = "/homePage";
+  static const fullScreenVideoPage = "/fullScreenVideoPage";
   static const needLoginCheckPages = [
 
   ];
@@ -20,6 +23,11 @@ class AppRoutes {
     indexPage: (context, args) => const SplashPage(),
     loginPage: (context, args) => const LoginPage(),
     homePage: (context, args) => const HomePage(),
+    fullScreenVideoPage: (context, args) {
+      return HorizontalVideoItemWidget(
+        videoItem: args as VideoItemModel,
+      );
+    },
   };
 
   static loginCheck(String? pageName) {
