@@ -3,7 +3,7 @@ import 'package:TikBili/business/home_page.dart';
 import 'package:TikBili/business/login_page.dart';
 import 'package:TikBili/business/splash_page.dart';
 import 'package:TikBili/business/video/videoState.dart';
-import 'package:TikBili/business/video/video_item/horizontalVideoItemWidget.dart';
+import 'package:TikBili/business/video/video_item/horizontal_video_item_widget.dart';
 import 'package:TikBili/utils/log.dart';
 import 'package:flutter/cupertino.dart';
 

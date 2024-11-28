@@ -1,20 +1,22 @@
 import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
-import 'package:flutter/cupertino.dart';
 
 class VideoState extends Equatable {
   final List<VideoItemModel> videoList;
+  final int currentPageIndex;
 
-  const VideoState(this.videoList);
+  const VideoState(this.videoList, this.currentPageIndex);
 
   @override
   List<Object?> get props => [videoList];
 
   copyWith({
     List<VideoItemModel>? videoList,
+    int? currentPageIndex,
   }) {
-    return VideoState(videoList ?? this.videoList);
+    return VideoState(
+        videoList ?? this.videoList, currentPageIndex ?? this.currentPageIndex);
   }
 }
 
@@ -104,7 +106,7 @@ class VideoItemModel {
       duration ?? this.duration,
       byteSize ?? this.byteSize,
       stat ?? this.stat,
-      poster?? this.poster,
+      poster ?? this.poster,
     );
   }
 }

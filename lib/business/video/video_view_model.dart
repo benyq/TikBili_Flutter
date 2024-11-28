@@ -1,6 +1,7 @@
 import 'package:TikBili/business/common/page_data_widget.dart';
 import 'package:TikBili/business/common/view_state/view_state.dart';
 import 'package:TikBili/business/video/videoState.dart';
+import 'package:TikBili/business/video/video_controller_container.dart';
 import 'package:TikBili/http/bilibili/model/recommend_video_model.dart' as recommendVideo;
 import 'package:TikBili/http/bilibili/model/video_url_model.dart';
 import 'package:TikBili/providers/api_provider.dart';
@@ -17,7 +18,7 @@ class VideoViewModel extends _$VideoViewModel with PageLogic{
   @override
   ViewState<VideoState> build() {
     initData();
-    return const ViewState(data: VideoState([]));
+    return const ViewState(data: VideoState([], 0));
   }
 
   void initData() {
@@ -120,5 +121,18 @@ class VideoViewModel extends _$VideoViewModel with PageLogic{
     final api = await ref.read(apiProvider);
     var videoUrl = await api.videoUrl(bvid, cid).handle();
     return videoUrl?.durl.first;
+  }
+
+  void updatePageIndex(int pageIndex) {
+    if (state.data == null) return;
+    final stateData = state.data!;
+    if (stateData.currentPageIndex == pageIndex) return;
+    final oldVideoItem = stateData.videoList[stateData.currentPageIndex];
+    final videItem = stateData.videoList[pageIndex];
+    final playContainer = VideoControllerContainer();
+    playContainer.videoController(oldVideoItem.bvid)?.pause();
+    playContainer.videoController(videItem.bvid)?.play();
+
+    state = state.successState(state.data?.copyWith(currentPageIndex: pageIndex));
   }
 }

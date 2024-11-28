@@ -1,6 +1,7 @@
+import 'package:TikBili/business/common/keep_alive_wrapper.dart';
 import 'package:TikBili/business/common/page_data_widget.dart';
 import 'package:TikBili/business/common/view_state/state_view_widget.dart';
-import 'package:TikBili/business/video/video_item/video_item_widget.dart';
+import 'package:TikBili/business/video/video_item/vertical_video_item_widget.dart';
 import 'package:TikBili/business/video/video_view_model.dart';
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/cupertino.dart';
@@ -31,14 +32,21 @@ class _VideoContainerPageState extends ConsumerState<VideoContainerPage> with St
   @override
   Widget buildPagingList(WidgetRef ref) {
     final videoList = ref.watch(videoViewModelProvider.select((v) => v.data?.videoList)) ?? [];
+    final currentPageIndex = ref.watch(videoViewModelProvider.select((v)=> v.data?.currentPageIndex)) ?? 0;
     return PageView.builder(
         scrollDirection: Axis.vertical,
         itemCount: videoList.length,
+        onPageChanged: (index) {
+            _videoVM.updatePageIndex(index);
+        },
         itemBuilder: (context, index) {
           var item = videoList[index];
           return SizedBox(
-              height: double.infinity,
-              child: VideoItemWidget(videoItem: item));
+            height: double.infinity,
+            child: KeepAliveWrapper(
+              keepAlive: (index - currentPageIndex).abs() == 1,
+                child: VideoItemWidget(videoItem: item)),
+          );
         });
   }
 
