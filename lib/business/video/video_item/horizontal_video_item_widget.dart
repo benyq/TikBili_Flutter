@@ -1,4 +1,5 @@
 import 'package:TikBili/business/video/videoState.dart';
+import 'package:TikBili/business/video/video_item/layer/horizontal_controller_layer.dart';
 import 'package:TikBili/business/video/video_item/video_item_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -23,13 +24,16 @@ class HorizontalVideoItemWidgetState extends ConsumerState<HorizontalVideoItemWi
   @override
   void initState() {
     super.initState();
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays:[]);
     _videoItemVM = ref.read(videoItemViewModelProvider.call(widget.videoItem).notifier);
     _controller = _videoItemVM.controller;
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight
-    ]);
   }
 
+  @override
+  void dispose() {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: SystemUiOverlay.values);
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,9 +44,18 @@ class HorizontalVideoItemWidgetState extends ConsumerState<HorizontalVideoItemWi
           SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
         }
       },
-      child: AspectRatio(
-        aspectRatio: _controller.value.aspectRatio,
-        child: VideoPlayer(_controller),
+      child: Container(
+        child: Stack(
+          children: [
+            Center(
+              child: AspectRatio(
+                aspectRatio: _controller.value.aspectRatio,
+                child: VideoPlayer(_controller),
+              ),
+            ),
+            HorizontalControllerLayer(videoItem: widget.videoItem,)
+          ],
+        ),
       ),
     );
   }

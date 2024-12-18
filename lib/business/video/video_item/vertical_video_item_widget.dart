@@ -8,6 +8,7 @@ import 'package:TikBili/business/video/video_item/video_item_view_model.dart';
 import 'package:TikBili/utils/log.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:video_player/video_player.dart';
@@ -100,7 +101,11 @@ class _VideoItemWidgetState extends ConsumerState<VideoItemWidget> {
                 right: 0,
                 child: SliderLayer(
                   videoItem: _videoItem,
+                  isVertical: true,
                   onTap: () {
+                    SystemChrome.setPreferredOrientations([
+                      DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight
+                    ]);
                     Navigator.pushNamed(context, AppRoutes.fullScreenVideoPage,
                         arguments: _videoItem);
                   },
